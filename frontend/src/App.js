@@ -7,6 +7,7 @@ const App = () => {
   // ---------------
   //  HOOKS
   // ----------------
+  // new food
   const [food, setFood] = useState([])
   const [newName, setNewName] = useState('')
   const [newLocation, setNewLocation] = useState('')
@@ -15,6 +16,17 @@ const App = () => {
   const [newRating, setNewRating] = useState()
   const [newDescription, setNewDescription] = useState('')
 
+  // show
+  const [showAddForm, setShowAddForm] = useState(false)
+
+
+
+  // ---------------
+  // GET FUNCTIONS
+  // ---------------
+  const getAddForm = () => {
+    setShowAddForm(!showAddForm)
+  }
 
 
   // ---------------
@@ -65,11 +77,8 @@ const App = () => {
           setFood(response.data)
         })
     })
+    setShowAddForm(false)
   }
-
-
-
-
 
 
 
@@ -87,7 +96,10 @@ const App = () => {
   return (
     <main>
       <h1>FAST FOOD RATINGS</h1>
-      <section>
+      <button onClick={getAddForm}>ADD RATING</button>
+
+
+      {showAddForm ? <section>
         <form onSubmit={handleForm}>
           <label>Name:</label>
           <input type="text" onChange={handleNewName}></input><br/>
@@ -109,7 +121,30 @@ const App = () => {
 
           <input type="submit" value="add new rating" />
         </form>
-      </section>
+      </section> : null }
+      
+      {
+        food.map((chicken) => {
+
+          return (
+            <div>
+              <img src={chicken.image} />
+              <h2>{chicken.name}</h2>
+              <h4>From: {chicken.location}</h4>
+              <p><b>Price:</b> {chicken.price}</p>
+              <p><b>Rating:</b> {chicken.rating}</p>
+              <p>{chicken.description}</p>
+            </div>
+          )
+
+
+        })
+
+
+      }
+
+
+
     </main>
   )
 }
