@@ -1,11 +1,40 @@
 * {
     margin: 2%;
+    padding: 10px;
 }
 
 body {
     text-align: center;
+    background-color: white;
 }
 
 img {
     width: 50%;
+}
+
+.name {
+    border: 2px solid black;
+    box-shadow: 15px 10px 10px rgb(240, 176, 123);
+}
+
+.form {
+    border: 2px solid black;
+}
+
+button, .container {
+    border: 1px solid black;
+    color: black;
+}
+
+.container {
+    background-color: rgba(245, 234, 224, 0.705);
+    
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button, input {
+    background-color: white;
 }
