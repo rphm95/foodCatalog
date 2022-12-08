@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios'
+import Chicken from './components/Chicken';
+
 
 const App = () => {
   // ---------------
@@ -16,9 +18,17 @@ const App = () => {
   const [newRating, setNewRating] = useState()
   const [newDescription, setNewDescription] = useState('')
 
+
+  //edit hooks
+  const [updateName, setUpdateName] = useState()
+  const [updateLocation, setUpdateLocation] = useState()
+  const [updatePrice, setUpdatePrice] = useState()
+  const [updateImage, setUpdateImage] = useState()
+  const [updateRating, setUpdateRating] = useState()
+  const [updateDescription, setUpdateDescription] = useState()
+
   // show
   const [showAddForm, setShowAddForm] = useState(false)
-
 
 
   // ---------------
@@ -56,9 +66,9 @@ const App = () => {
     setNewDescription(event.target.value)
   }
 
-  // handle form
+   // handle form
 
-  const handleForm = (event) => {
+   const handleForm = (event) => {
     event.preventDefault()
     axios.post(
       'http://localhost:3000/fastfood',
@@ -81,6 +91,68 @@ const App = () => {
   }
 
 
+   // ---------------
+  // HANDLE UPDATE FOOD
+  // -----=----------
+  const handleUpdateName = (event) => {
+    setUpdateName(event.target.value)
+  }
+
+  const handleUpdateLocation = (event) => {
+    setUpdateLocation(event.target.value)
+  }
+
+  const handleUpdatePrice = (event) => {
+    setUpdatePrice(event.target.value)
+  }
+
+  const handleUpdateImage = (event) => {
+    setUpdateImage(event.target.value)
+  }
+
+  const handleUpdateRating = (event) => {
+    setUpdateRating(event.target.value)
+  }
+
+  const handleUpdateDescription = (event) => {
+    setUpdateDescription(event.target.value)
+  }
+
+  //handle update form
+  const handleUpdateForm = (chickenData) => {
+    axios
+        .put(`http://localhost:3000/fastfood/${chickenData._id}`, 
+        {
+          name: updateName,
+          location: updateLocation,
+          price: updatePrice,
+          image: updateImage,
+          rating: updateRating,
+          description: updateDescription
+        }).then((response) => {
+          axios
+              .get('http://localhost:3000/fastfood')
+              .then((response) => {
+                setFood(response.data)
+              })
+        })
+  }
+
+   // ---------------
+  // HANDLE DELETE
+  // -----=----------
+  const handleDelete = (chickenData) => {
+    axios
+        .delete(`http://localhost:3000/fastfood/${chickenData._id}`)
+        .then(() => {
+          axios
+              .get('http://localhost:3000/fastfood')
+              .then((response) => {
+                setFood(response.data)
+              })
+
+        })
+  }
 
   useEffect(() => {
     axios
@@ -128,12 +200,7 @@ const App = () => {
 
           return (
             <div>
-              <img src={chicken.image} />
-              <h2>{chicken.name}</h2>
-              <h4>From: {chicken.location}</h4>
-              <p><b>Price:</b> {chicken.price}</p>
-              <p><b>Rating:</b> {chicken.rating}</p>
-              <p>{chicken.description}</p>
+             <Chicken chicken={chicken} handleUpdateForm={handleUpdateForm} handleDelete={handleDelete} handleUpdateDescription={handleUpdateDescription} handleUpdateRating={handleUpdateRating} handleUpdateImage={handleUpdateImage} handleUpdatePrice={handleUpdatePrice} handleUpdateLocation={handleUpdateLocation} handleUpdateName={handleUpdateName}></Chicken>
             </div>
           )
 
