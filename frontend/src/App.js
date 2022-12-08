@@ -167,31 +167,31 @@ const App = () => {
 
   return (
     <main>
-      <h1>FAST FOOD RATINGS</h1>
+      <h1 className='name'>FAST FOOD RATINGS</h1>
       <button onClick={getAddForm}>ADD RATING</button>
 
 
-      {showAddForm ? <section>
+      {showAddForm ? <section className='container'>
         <form onSubmit={handleForm}>
-          <label>Name:</label>
+          <label>Name:</label><br></br>
           <input type="text" onChange={handleNewName}></input><br/>
 
-          <label>Location:</label>
+          <label>Location:</label><br></br>
           <input type="text" onChange={handleNewLocation}></input><br/>
 
-          <label>Price:</label>
+          <label>Price:</label><br></br>
           <input type="number" onChange={handleNewPrice}></input><br/>
 
-          <label>Image Link:</label>
+          <label>Image Link:</label><br></br>
           <input type="text" onChange={handleNewImage}></input><br/>
 
-          <label>Rating(min 0 - max 5):</label>
+          <label>Rating(min 0 - max 5):</label><br></br>
           <input type="number" onChange={handleNewRating}></input><br/>
 
-          <label>Notes:</label>
+          <label>Notes:</label><br></br>
           <input type="text" onChange={handleNewDescription}></input><br/>
 
-          <input type="submit" value="add new rating" />
+          <input type="submit" value="Add New Rating" />
         </form>
       </section> : null }
       
