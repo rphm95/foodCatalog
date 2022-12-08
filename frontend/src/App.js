@@ -49,7 +49,7 @@ const App = () => {
   const handleForm = (event) => {
     event.preventDefault()
     axios.post(
-      'htpp://localhost:3000/fastfood',
+      'http://localhost:3000/fastfood',
       {
         name: newName,
         location: newLocation,
