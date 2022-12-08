@@ -2,8 +2,7 @@ import React from 'react';
 import { useState} from 'react';
 
 const Chicken = (props) => {
-
-    const [showAddForm, setShowAddForm] = useState(false)
+    
     const [showEdit, setShowEdit] = useState(false)
 
     const getEditPage = () => {
